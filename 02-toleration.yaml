@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: selector
+  labels: 
+    purpose: selector
+spec:
+  nodeSelector:
+    topology.kubernetes.io/zone: us-east-1c #Pods will be created in the mentioned AZ.
+  containers:
+  - name: nginx
+    image: nginx
+  tolerations:
+  -  key: "hardware"
+     operator: "Equal"
+     value: "gpu"
+     effect: "NoSchedule"
+  -  key: "hardware"
+     operator: "Equal"
+     value: "gpu"
+     effect: "NoExecute"
